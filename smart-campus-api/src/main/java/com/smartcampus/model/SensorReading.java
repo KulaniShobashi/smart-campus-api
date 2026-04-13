@@ -9,22 +9,17 @@ package com.smartcampus.model;
  * @author kulanitennakoon
  */
 public class SensorReading {
-    
     private String id;
-    private String type;
-    private String status;
-    private double currentValue;
-    private String roomId;
+    private long timestamp;
+    private double value;
 
-    public Sensor() {
+    public SensorReading() {
     }
 
-    public Sensor(String id, String type, String status, double currentValue, String roomId) {
+    public SensorReading(String id, long timestamp, double value) {
         this.id = id;
-        this.type = type;
-        this.status = status;
-        this.currentValue = currentValue;
-        this.roomId = roomId;
+        this.timestamp = timestamp;
+        this.value = value;
     }
 
     public String getId() {
@@ -35,36 +30,19 @@ public class SensorReading {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public long getTimestamp() {
+        return timestamp;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public String getStatus() {
-        return status;
+    public double getValue() {
+        return value;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setValue(double value) {
+        this.value = value;
     }
-
-    public double getCurrentValue() {
-        return currentValue;
-    }
-
-    public void setCurrentValue(double currentValue) {
-        this.currentValue = currentValue;
-    }
-
-    public String getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
-    }
-    
 }
