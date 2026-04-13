@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author kulanitennakoon
  */
-public class LoggingFilter {
+public class LoggingFilter implements ContainerRequestFilter, ContainerResponseFilter{
     
     private static final Logger LOGGER = Logger.getLogger(LoggingFilter.class.getName());
 
