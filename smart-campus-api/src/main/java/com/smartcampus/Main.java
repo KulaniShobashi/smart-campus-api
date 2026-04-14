@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             Tomcat tomcat = new Tomcat();
-            tomcat.setPort(8081);
+            tomcat.setPort(8082);
             tomcat.setBaseDir("tomcat-temp");
 
             // IMPORTANT: force Tomcat to create the connector
@@ -28,7 +28,7 @@ public class Main {
             tomcat.start();
 
             System.out.println("=== SERVER STARTED SUCCESSFULLY ===");
-            System.out.println("http://localhost:8081/api/v1/");
+            System.out.println("http://localhost:8082/api/v1/");
             System.out.println("Do not close this Run tab.");
 
             tomcat.getServer().await();

@@ -1,31 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.smartcampus.filter;
 
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.container.ContainerResponseContext;
-import javax.ws.rs.container.ContainerResponseFilter;
-import javax.ws.rs.ext.Provider;
-import java.io.IOException;
+import jakarta.ws.rs.container.*;
+import jakarta.ws.rs.ext.Provider;
 import java.util.logging.Logger;
 
 @Provider
 public class LoggingFilter implements ContainerRequestFilter, ContainerResponseFilter {
-
-    private static final Logger LOGGER = Logger.getLogger(LoggingFilter.class.getName());
+    private static final Logger LOG = Logger.getLogger(LoggingFilter.class.getName());
 
     @Override
-    public void filter(ContainerRequestContext requestContext) throws IOException {
-        LOGGER.info("Incoming Request -> Method: " + requestContext.getMethod()
-                + ", URI: " + requestContext.getUriInfo().getRequestUri());
+    public void filter(ContainerRequestContext req) {
+        LOG.info(">>> REQUEST: " + req.getMethod() + " " + req.getUriInfo().getPath());
     }
 
     @Override
-    public void filter(ContainerRequestContext requestContext,
-                       ContainerResponseContext responseContext) throws IOException {
-        LOGGER.info("Outgoing Response -> Status: " + responseContext.getStatus());
+    public void filter(ContainerRequestContext req, ContainerResponseContext res) {
+        LOG.info("<<< RESPONSE: " + res.getStatus());
     }
 }

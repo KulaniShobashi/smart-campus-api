@@ -4,27 +4,25 @@
  */
 package com.smartcampus.mapper;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
-import java.util.HashMap;
+import com.smartcampus.exception.*;
+import jakarta.ws.rs.core.*;
+import jakarta.ws.rs.ext.*;
 import java.util.Map;
 
 @Provider
 public class GlobalExceptionMapper implements ExceptionMapper<Throwable> {
-
     @Override
-    public Response toResponse(Throwable ex) {
-        ex.printStackTrace(); // VERY IMPORTANT for debugging
-
-        Map<String, String> error = new HashMap<>();
-        error.put("error", "Internal Server Error");
-        error.put("message", "An unexpected error occurred. Please contact the administrator.");
-
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                .type(MediaType.APPLICATION_JSON)
-                .entity(error)
-                .build();
+    public Response toResponse(Throwable e) {
+        if (e instanceof RoomNotEmptyException) {
+            return Response.status(409).entity(Map.of("error", e.getMessage())).build();
+        }
+        if (e instanceof LinkedResourceNotFoundException) {
+            return Response.status(422).entity(Map.of("error", e.getMessage())).build();
+        }
+        if (e instanceof SensorUnavailableException) {
+            return Response.status(403).entity(Map.of("error", e.getMessage())).build();
+        }
+        // Catch-all 500 safety net
+        return Response.status(500).entity(Map.of("error", "Internal Server Error")).build();
     }
 }
