@@ -3,34 +3,38 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.smartcampus;
+
 import com.smartcampus.config.ApplicationConfig;
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-
-/**
- *
- * @author kulanitennakoon
- */
-
 public class Main {
-    public static void main(String[] args) throws Exception {
-        Tomcat tomcat = new Tomcat();
-        tomcat.setPort(8080);
 
-        Context context = tomcat.addContext("", null);
+    public static void main(String[] args) {
+        try {
+            Tomcat tomcat = new Tomcat();
+            tomcat.setPort(8081);
+            tomcat.setBaseDir("tomcat-temp");
 
-        Tomcat.addServlet(context, "jersey-servlet", new ServletContainer(new ApplicationConfig()));
-        context.addServletMappingDecoded("/*", "jersey-servlet");
+            // IMPORTANT: force Tomcat to create the connector
+            tomcat.getConnector();
 
-        tomcat.start();
+            Context context = tomcat.addContext("", new java.io.File(".").getAbsolutePath());
 
-        System.out.println("Smart Campus API is running at:");
-        System.out.println("http://localhost:8080/api/v1/");
-        System.out.println("Press Ctrl + C to stop.");
+            Tomcat.addServlet(context, "jersey-servlet", new ServletContainer(new ApplicationConfig()));
+            context.addServletMappingDecoded("/*", "jersey-servlet");
 
-        tomcat.getServer().await();
+            tomcat.start();
+
+            System.out.println("=== SERVER STARTED SUCCESSFULLY ===");
+            System.out.println("http://localhost:8081/api/v1/");
+            System.out.println("Do not close this Run tab.");
+
+            tomcat.getServer().await();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
 }

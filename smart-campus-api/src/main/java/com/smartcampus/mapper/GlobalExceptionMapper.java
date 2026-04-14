@@ -11,15 +11,13 @@ import javax.ws.rs.ext.Provider;
 import java.util.HashMap;
 import java.util.Map;
 
-
-/**
- *
- * @author kulanitennakoon
- */
 @Provider
-public class GlobalExceptionMapper implements ExceptionMapper<Throwable>  {
+public class GlobalExceptionMapper implements ExceptionMapper<Throwable> {
+
     @Override
     public Response toResponse(Throwable ex) {
+        ex.printStackTrace(); // VERY IMPORTANT for debugging
+
         Map<String, String> error = new HashMap<>();
         error.put("error", "Internal Server Error");
         error.put("message", "An unexpected error occurred. Please contact the administrator.");
@@ -28,5 +26,5 @@ public class GlobalExceptionMapper implements ExceptionMapper<Throwable>  {
                 .type(MediaType.APPLICATION_JSON)
                 .entity(error)
                 .build();
-    }   
+    }
 }

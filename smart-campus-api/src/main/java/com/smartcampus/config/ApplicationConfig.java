@@ -11,20 +11,13 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
 
-/**
- *
- * @author kulanitennakoon
- */
 @ApplicationPath("/api/v1")
-public class ApplicationConfig {
-   
+public class ApplicationConfig extends ResourceConfig {
+
     public ApplicationConfig() {
         register(DiscoveryResource.class);
         register(LoggingFilter.class);
         register(GlobalExceptionMapper.class);
-
         packages("com.smartcampus");
     }
-
-    
 }

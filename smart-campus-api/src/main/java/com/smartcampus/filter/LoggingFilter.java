@@ -13,13 +13,8 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 @Provider
+public class LoggingFilter implements ContainerRequestFilter, ContainerResponseFilter {
 
-/**
- *
- * @author kulanitennakoon
- */
-public class LoggingFilter implements ContainerRequestFilter, ContainerResponseFilter{
-    
     private static final Logger LOGGER = Logger.getLogger(LoggingFilter.class.getName());
 
     @Override
@@ -33,5 +28,4 @@ public class LoggingFilter implements ContainerRequestFilter, ContainerResponseF
                        ContainerResponseContext responseContext) throws IOException {
         LOGGER.info("Outgoing Response -> Status: " + responseContext.getStatus());
     }
-    
 }

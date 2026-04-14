@@ -11,15 +11,11 @@ import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * @author kulanitennakoon
- */
-@Path("/")
-@Produce(MediaType.APPLICATION_JSON)
-public class DiscoveryReasource {
-    
-   @GET
+@Path("")
+@Produces(MediaType.APPLICATION_JSON)
+public class DiscoveryResource {
+
+    @GET
     public Map<String, Object> getApiInfo() {
         Map<String, Object> response = new HashMap<>();
         Map<String, String> resources = new HashMap<>();
@@ -33,6 +29,5 @@ public class DiscoveryReasource {
         response.put("resources", resources);
 
         return response;
-    } 
-    
+    }
 }
